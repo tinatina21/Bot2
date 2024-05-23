@@ -51,15 +51,15 @@ async def button_1_click(message: types.Message):
     await message.answer('Железный человек - Гений, миллиардер, плэйбой, филантроп.', reply_markup= keyboard_inline)
 @dp.message_handler(lambda message: message.text == 'кнопка 2')
 async def button_2_click(message: types.Message):
-    await message.answer('Человек Паук - обладает необычайной силой и ловкостью, развиты рефлексы и чувство равновесия, умеет лазить стенам и потолку.')
+    await message.answer('Человек Паук - обладает необычайной силой и ловкостью, развиты рефлексы и чувство равновесия, умеет лазить стенам и потолку.', reply_markup= keyboard_inline )
 
 @dp.message_handler(lambda message: message.text == 'кнопка 3')
 async def button_3_click(message: types.Message):
-        await message.answer('Капитан Америка - сила, выносливость, бессмертие, быстрая регенерация, мастерство скрытности и боя.')
+        await message.answer('Капитан Америка - сила, выносливость, бессмертие, быстрая регенерация, мастерство скрытности и боя.', reply_markup= keyboard_inline)
 
 @dp.message_handler(lambda message: message.text == 'кнопка 4')
 async def button_4_click(message: types.Message):
-            await message.answer('Доктор Стрэндж — обладает телепатией, навыками гипноза, способностью к телекинезу, умеет перемещаться в астрал и создавать иллюзии.')
+            await message.answer('Доктор Стрэндж — обладает телепатией, навыками гипноза, способностью к телекинезу, умеет перемещаться в астрал и создавать иллюзии.', reply_markup= keyboard_inline)
 @dp.message_handler(commands='help')
 async def help(message: types.Message):
     await message.reply('Я помогу тебе..!')
