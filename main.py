@@ -7,13 +7,23 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 bot = Bot(token=TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
-keyboard_inline = InlineKeyboardMarkup(row_width= 1)
-but_inline = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/iron-man')
-but_inline2 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/games/marvel-s-spider-man')
-but_inline3 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/captain-america-the-first-avenger')
-but_inline4 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/doctor-strange')
-keyboard_inline.add(but_inline, but_inline2, but_inline3, but_inline4)
 
+keyboard_inline1 = InlineKeyboardMarkup(row_width= 1)
+but_inline = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/iron-man')
+keyboard_inline1.add(but_inline)
+
+
+keyboard_inline2 = InlineKeyboardMarkup(row_width= 1)
+but_inline2 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/games/marvel-s-spider-man')
+keyboard_inline2.add(but_inline2)
+
+keyboard_inline3 = InlineKeyboardMarkup(row_width= 1)
+but_inline3 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/captain-america-the-first-avenger')
+keyboard_inline3.add(but_inline3)
+
+keyboard_inline4 = InlineKeyboardMarkup(row_width= 1)
+but_inline4 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/doctor-strange')
+keyboard_inline4.add(but_inline4)
 
 
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -48,18 +58,18 @@ async def marvel(message: types.Message):
     await message.answer('Выбери кнопку, я расскажу про супергероя и его способности..', reply_markup=keyboard)
 @dp.message_handler(lambda message: message.text == 'кнопка 1')
 async def button_1_click(message: types.Message):
-    await message.answer('Железный человек - Гений, миллиардер, плэйбой, филантроп.', reply_markup= keyboard_inline)
+    await message.answer('Железный человек - Гений, миллиардер, плэйбой, филантроп.', reply_markup= keyboard_inline1)
 @dp.message_handler(lambda message: message.text == 'кнопка 2')
 async def button_2_click(message: types.Message):
-    await message.answer('Человек Паук - обладает необычайной силой и ловкостью, развиты рефлексы и чувство равновесия, умеет лазить стенам и потолку.', reply_markup= keyboard_inline )
+    await message.answer('Человек Паук - обладает необычайной силой и ловкостью, развиты рефлексы и чувство равновесия, умеет лазить стенам и потолку.', reply_markup= keyboard_inline2 )
 
 @dp.message_handler(lambda message: message.text == 'кнопка 3')
 async def button_3_click(message: types.Message):
-        await message.answer('Капитан Америка - сила, выносливость, бессмертие, быстрая регенерация, мастерство скрытности и боя.', reply_markup= keyboard_inline)
+        await message.answer('Капитан Америка - сила, выносливость, бессмертие, быстрая регенерация, мастерство скрытности и боя.', reply_markup= keyboard_inline3)
 
 @dp.message_handler(lambda message: message.text == 'кнопка 4')
 async def button_4_click(message: types.Message):
-            await message.answer('Доктор Стрэндж — обладает телепатией, навыками гипноза, способностью к телекинезу, умеет перемещаться в астрал и создавать иллюзии.', reply_markup= keyboard_inline)
+            await message.answer('Доктор Стрэндж — обладает телепатией, навыками гипноза, способностью к телекинезу, умеет перемещаться в астрал и создавать иллюзии.', reply_markup= keyboard_inline4)
 @dp.message_handler(commands='help')
 async def help(message: types.Message):
     await message.reply('Я помогу тебе..!')
