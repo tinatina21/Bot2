@@ -1,11 +1,20 @@
 from aiogram import Bot, Dispatcher, types, executor
 from config import TELEGRAM_TOKEN
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 #import string
 #import random
 
 bot = Bot(token=TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
+keyboard_inline = InlineKeyboardMarkup(row_width= 1)
+but_inline = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/iron-man')
+but_inline2 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/games/marvel-s-spider-man')
+but_inline3 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/captain-america-the-first-avenger')
+but_inline4 = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/doctor-strange')
+keyboard_inline.add(but_inline, but_inline2, but_inline3, but_inline4)
+
+
 
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 button_1 = KeyboardButton('кнопка 1')
@@ -39,7 +48,7 @@ async def marvel(message: types.Message):
     await message.answer('Выбери кнопку, я расскажу про супергероя и его способности..', reply_markup=keyboard)
 @dp.message_handler(lambda message: message.text == 'кнопка 1')
 async def button_1_click(message: types.Message):
-    await message.answer('Железный человек - Гений, миллиардер, плэйбой, филантроп.')
+    await message.answer('Железный человек - Гений, миллиардер, плэйбой, филантроп.', reply_markup= keyboard_inline)
 @dp.message_handler(lambda message: message.text == 'кнопка 2')
 async def button_2_click(message: types.Message):
     await message.answer('Человек Паук - обладает необычайной силой и ловкостью, развиты рефлексы и чувство равновесия, умеет лазить стенам и потолку.')
@@ -54,8 +63,6 @@ async def button_4_click(message: types.Message):
 @dp.message_handler(commands='help')
 async def help(message: types.Message):
     await message.reply('Я помогу тебе..!')
-
-
 
 @dp.message_handler()
 async def echo(message: types.Message):
