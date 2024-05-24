@@ -5,8 +5,12 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 #import string
 #import random
 
+from database.database import initialize_db, add_user, get_user
+
 bot = Bot(token=TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
+
+initialize_db()
 
 keyboard_inline1 = InlineKeyboardMarkup(row_width= 1)
 but_inline = InlineKeyboardButton('Посмотреть', url= 'https://www.marvel.com/movies/iron-man')
@@ -52,7 +56,12 @@ async def set_commands(bot: Bot):
 
 @dp.message_handler(commands='start')
 async def start(message: types.Message):
-    await message.answer('Привет я твой первый бот!')
+    user = get_user(message.from_user.id)
+    if user is None:
+        add_user(message.from_user.id, message.from_user.username, message.from_user.first_name, message.from_user.last_name)
+        await message.answer('Привет я твой первый бот!', reply_markup=keyboard)
+    else:
+        await message.answer('Привет я твой первый бот!', reply_markup=keyboard)
 @dp.message_handler(commands='marvel')
 async def marvel(message: types.Message):
     await message.answer('Выбери кнопку, я расскажу про супергероя и его способности..', reply_markup=keyboard)
